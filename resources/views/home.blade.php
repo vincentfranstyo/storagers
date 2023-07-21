@@ -82,7 +82,8 @@
                     </div>
                 @else
                     <a href="{{ route('login') }}"
-                       class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">Log in</a>
+                       class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">Log
+                        in</a>
 
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
@@ -99,16 +100,16 @@
             </div>
             <div class="mt-16">
                 <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 md:grid-cols-6 lg:gap-8">
-                    <a href="#" target="_blank"
+                    <a href="{{ route('purchase') }}"
                        class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit">
                         <div>
-                            <div
-                                class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">
-                                <figure>
-                                    <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">
-                                </figure>
-                            </div>
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Box</h2>
+                            {{--                            <div--}}
+                            {{--                                class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">--}}
+                            {{--                                <figure>--}}
+                            {{--                                    <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">--}}
+                            {{--                                </figure>--}}
+                            {{--                            </div>--}}
+                            <h2 class="mt-1 text-xl font-semibold text-gray-900 dark:text-white text-center">Box</h2>
                             <div class="mt-4 grid grid-cols-1 gap-1 md:grid-cols-2 lg:gap-8">
                                 <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
                                     price
@@ -117,130 +118,12 @@
                                     stocks
                                 </p>
                             </div>
-
-                        </div>
-                    </a>
-                    <a href="#" target="_blank"
-                       class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit">
-                        <div>
-                            <div
-                                class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">
-                                <figure>
-                                    <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">
-                                </figure>
-                            </div>
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Box</h2>
-                            <div class="mt-4 grid grid-cols-1 gap-1 md:grid-cols-2 lg:gap-8">
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    price
+                            <div class=" grid grid-cols-1 gap-1 md:grid-cols-2 lg:gap-8">
+                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-20">
+                                    `${1000}
                                 </p>
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    stocks
-                                </p>
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="#" target="_blank"
-                       class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit">
-                        <div>
-                            <div
-                                class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">
-                                <figure>
-                                    <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">
-                                </figure>
-                            </div>
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Box</h2>
-                            <div class="mt-4 grid grid-cols-1 gap-1 md:grid-cols-2 lg:gap-8">
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    price
-                                </p>
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    stocks
-                                </p>
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="#" target="_blank"
-                       class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit">
-                        <div>
-                            <div
-                                class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">
-                                <figure>
-                                    <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">
-                                </figure>
-                            </div>
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Box</h2>
-                            <div class="mt-4 grid grid-cols-1 gap-1 md:grid-cols-2 lg:gap-8">
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    price
-                                </p>
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    stocks
-                                </p>
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="#" target="_blank"
-                       class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit">
-                        <div>
-                            <div
-                                class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">
-                                <figure>
-                                    <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">
-                                </figure>
-                            </div>
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Box</h2>
-                            <div class="mt-4 grid grid-cols-1 gap-1 md:grid-cols-2 lg:gap-8">
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    price
-                                </p>
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    stocks
-                                </p>
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="#" target="_blank"
-                       class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit">
-                        <div>
-                            <div
-                                class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">
-                                <figure>
-                                    <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">
-                                </figure>
-                            </div>
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Box</h2>
-                            <div class="mt-4 grid grid-cols-1 gap-1 md:grid-cols-2 lg:gap-8">
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    price
-                                </p>
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    stocks
-                                </p>
-                            </div>
-
-                        </div>
-                    </a>
-                    <a href="#" target="_blank"
-                       class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit">
-                        <div>
-                            <div
-                                class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">
-                                <figure>
-                                    <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">
-                                </figure>
-                            </div>
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Box</h2>
-                            <div class="mt-4 grid grid-cols-1 gap-1 md:grid-cols-2 lg:gap-8">
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    price
-                                </p>
-                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-10">
-                                    stocks
+                                <p class="text-sm leading-relaxed text-gray-500 dark:text-gray-400 w-20">
+                                    2 piece
                                 </p>
                             </div>
 

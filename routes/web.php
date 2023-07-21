@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home')->name('home');
-Route::view('/history', 'components/history')->name('history');
-Route::view('/purchase', 'components/purchase')->name('purchase');
+Route::view('/history', 'components/history')->name('history') -> middleware('auth');
+Route::view('/purchase', 'components/purchase')->name('purchase') -> middleware('auth');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
