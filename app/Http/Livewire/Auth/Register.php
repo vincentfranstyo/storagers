@@ -15,6 +15,9 @@ class Register extends Component
     public $name = '';
 
     /** @var string */
+    public $username = '';
+
+    /** @var string */
     public $email = '';
 
     /** @var string */
@@ -27,12 +30,14 @@ class Register extends Component
     {
         $this->validate([
             'name' => ['required'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'min:8', 'same:passwordConfirmation'],
         ]);
 
         $user = User::create([
             'email' => $this->email,
+            'username' => $this->username,
             'name' => $this->name,
             'password' => Hash::make($this->password),
         ]);

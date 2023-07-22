@@ -32,6 +32,8 @@ Route::middleware('guest')->group(function () {
 
     Route::get('register', Register::class)
         ->name('register');
+    Route::post('register', [Register::class, 'register'])
+        ->name('register.post');
 });
 
 Route::get('password/reset', Email::class)
