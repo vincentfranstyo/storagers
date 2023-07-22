@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Auth\Passwords;
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -69,7 +71,7 @@ class Reset extends Component
     /**
      * Get the broker to be used during password reset.
      *
-     * @return \Illuminate\Contracts\Auth\PasswordBroker
+     * @return PasswordBroker
      */
     public function broker()
     {
@@ -79,7 +81,7 @@ class Reset extends Component
     /**
      * Get the guard to be used during password reset.
      *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     * @return StatefulGuard
      */
     protected function guard()
     {

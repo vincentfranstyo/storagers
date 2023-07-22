@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home')->name('home');
+Route::view('/detail', 'components/detail')->name('detail') -> middleware('auth');
 Route::view('/history', 'components/history')->name('history') -> middleware('auth');
 Route::view('/purchase', 'components/purchase')->name('purchase') -> middleware('auth');
 
