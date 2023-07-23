@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\Auth;
 
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
 use Livewire\Component;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class Register extends Component
 {
@@ -26,8 +26,36 @@ class Register extends Component
     /** @var string */
     public $passwordConfirmation = '';
 
-    public function register()
+//    public function register()
+//    {
+//        $this->validate([
+//            'name' => ['required'],
+//            'username' => ['required', 'string', 'max:255', 'unique:users'],
+//            'email' => ['required', 'email', 'unique:users'],
+//            'password' => ['required', 'min:8', 'same:passwordConfirmation'],
+//        ]);
+//
+//        $user = User::create([
+//            'email' => $this->email,
+//            'username' => $this->username,
+//            'name' => $this->name,
+//            'password' => Hash::make($this->password),
+//        ]);
+//
+//        event(new Registered($user));
+//
+//        Auth::login($user, true);
+//
+//        return redirect()->intended(route('home'));
+//    }
+    public function __construct()
     {
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    }
+
+    public function register(): \Illuminate\Http\JsonResponse
+    {
+        // with JWT Token
         $this->validate([
             'name' => ['required'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
@@ -42,11 +70,9 @@ class Register extends Component
             'password' => Hash::make($this->password),
         ]);
 
-        event(new Registered($user));
+        $token = JWTAuth::fromUser($user);
 
-        Auth::login($user, true);
-
-        return redirect()->intended(route('home'));
+        return response()->json(compact('user', 'token'), 201, (array)Auth::login($user, true));
     }
 
     public function render()
