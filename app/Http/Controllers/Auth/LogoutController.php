@@ -24,6 +24,6 @@ class LogoutController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out', 'redirect_url' => route('home')]);
+        return response()->json(['message' => 'Successfully logged out']);
     }
 }

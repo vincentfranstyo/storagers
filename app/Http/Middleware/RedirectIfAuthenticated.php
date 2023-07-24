@@ -21,10 +21,13 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth()::guard($guard)->check()) {
-                return redirect(route('home'));
+            if (Auth::guard('api')->check()) {
+                return response()->json(['message' => 'Already logged in', 'redirect_url' => route('home')]);
             }
 //            if (JWTAuth::guard($guard)->check()) {
+//                return response()->json(['message' => 'Already logged in', 'redirect_url' => route('home')]);
+//            }
+//            if (JWTAuth\JWTGuard::user($guard)->check()) {
 //                return response()->json(['message' => 'Already logged in', 'redirect_url' => route('home')]);
 //            }
         }

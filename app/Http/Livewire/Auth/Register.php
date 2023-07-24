@@ -3,10 +3,11 @@
 namespace App\Http\Livewire\Auth;
 
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 
 class Register extends Component
@@ -48,31 +49,44 @@ class Register extends Component
 //
 //        return redirect()->intended(route('home'));
 //    }
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+//    }
 
-    public function register(): \Illuminate\Http\JsonResponse
+    public function register(): JsonResponse
     {
-        // with JWT Token
-        $this->validate([
-            'name' => ['required'],
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8', 'same:passwordConfirmation'],
+        $validator = Validator::make(request()->all(), [
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
         $user = User::create([
-            'email' => $this->email,
-            'username' => $this->username,
-            'name' => $this->name,
-            'password' => Hash::make($this->password),
+            'email' => request('email'),
+            'username' => request('username'),
+            'name' => request('name'),
+            'password' => Hash::make(request('password')),
         ]);
 
-        $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user', 'token'), 201, (array)Auth::login($user, true));
+
+        if ($user){
+            Auth::login($user, true);
+            return response()->json([
+                'message' => 'User successfully registered',
+                'user' => $user
+            ], 201);
+        } else {
+            return response()->json([
+                'message' => 'User registration failed',
+            ], 400);
+        }
     }
 
     public function render()

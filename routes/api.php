@@ -22,8 +22,8 @@ use App\Http\Controllers\AuthController;
 //});
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
-    Route::post('register', [AuthController::class, 'register']);
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('me', [AuthController::class, 'me']);
+    Route::post('register', [Register::class, 'register']);
+    Route::post('login', [Login::class, 'authenticate']);
+    Route::post('logout', [LogoutController::class, '__invoke']);
+    Route::post('user-profile', [AuthController::class, 'me']);
 });

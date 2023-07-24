@@ -16,6 +16,9 @@ class Login extends Component
     /** @var string */
     public $password = '';
 
+    /** @var string */
+    public $username = '';
+
     /** @var bool */
     public $remember = false;
 
@@ -38,26 +41,46 @@ class Login extends Component
 //    }
     public function authenticate()
     {
-        $this->validate();
+//        $this->validate();
+//
+//        $credentials = [
+//            'email' => $this->email,
+//            'password' => $this->password,
+//        ];
+//
+//        try {
+//            if (!$token = auth()->attempt($credentials)) {
+//                return response()->json(['error' => 'invalid_credentials'], 401);
+//            }
+//        } catch (JWTException $e) {
+//            return response()->json(['error' => 'could_not_create_token'], 500);
+//        }
+//
+//        // redirect to home page
+//        return [$this->respondWithToken($token), redirect('/')];
+        $credentials = request(['email', 'password']);
 
-        $credentials = [
-            'email' => $this->email,
-            'password' => $this->password,
-        ];
-
-        try {
-            if (!$token = JWTAuth::attempt($credentials)) {
-                $this->addError('email', trans('auth.failed'));
-                return;
-            }
-        } catch (JWTException $e) {
-            $this->addError('email', trans('auth.failed'));
-            return;
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return response()->json(['token' => $token], 200, (array)redirect()->intended(route('home')));
-        //         Store the token in the session or local storage as needed
-//         Redirect to the desired page or emit an event to handle the successful login
+        return $this->respondWithToken($token);
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken(string $token): \Illuminate\Http\JsonResponse
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 
     public function render()
