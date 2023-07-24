@@ -100,17 +100,11 @@
             <div class="mt-16 min-w-fit">
                 <div
                     class="scale-100 p-5 pt-3 pb-3 pr-5 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit w-auto justify-evenly flex-col">
-                    <div class="flex min-w-fit gap-x-20">
+                    <div class="flex min-w-fit justify-between pl-0">
                         <div class="flex">
-                            {{--                        <div--}}
-                            {{--                            class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">--}}
-                            {{--                            <figure>--}}
-                            {{--                                <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">--}}
-                            {{--                            </figure>--}}
-                            {{--                        </div>--}}
                             <div
-                                class="flex text-3xl pl-[3rem] pt-2 justify-content-center items-center text-gray-500 dark:text-white">
-                                box
+                                class="flex text-3xl items-center justify-center text-gray-500 dark:text-white w-40">
+                                {{ $catalog['nama'] }}
                             </div>
                         </div>
                         <div
@@ -122,8 +116,8 @@
                             </div>
                             <div
                                 class="flex flex-col-reverse gap-1 h-auto text-gray-500 dark:text-white text-lg pb-1 pr-5 pt-1 min-w-fit">
-                                <div>$30</div>
-                                <div>x pieces</div>
+                                <div>{{ $catalog['harga'] }}</div>
+                                <div>{{ $catalog['stok'] }}</div>
                             </div>
                         </div>
                     </div>
@@ -134,7 +128,7 @@
                         </button>
                         <button type="button"
                                 class="bg-blue-950 text-white border-b-indigo-800 rounded-full max-w-xl min-w-fit w-40 p-x-10  hover:bg-blue-200  hover:underline">
-                            <a class="text-xl hover:text-gray-500" href="{{ route('purchase') }}">Purchase</a>
+                            <a class="text-xl hover:text-gray-500" href="{{ route('purchase', ['name' => $catalog['nama']]) }}">Purchase</a>
                         </button>
                     </div>
                 </div>

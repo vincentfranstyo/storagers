@@ -9,6 +9,9 @@ use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DetailController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +24,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'home')->name('home');
-Route::view('/detail', 'components/detail')->name('detail') -> middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/detail/{name}', [DetailController::class, 'show'])->name('detail')->middleware('auth');
+//Route::get('/history/{id}', [DetailController::class, 'history'])->name('history')->middleware('auth');
+Route::get('/purchase/{name}', [PurchaseController::class, 'purchase'])->name('purchase')->middleware('auth');
+
+//Route::view('/', 'home')->name('home');
+//Route::view('/detail', 'components/detail')->name('detail') -> middleware('auth');
 Route::view('/history', 'components/history')->name('history') -> middleware('auth');
-Route::view('/purchase', 'components/purchase')->name('purchase') -> middleware('auth');
+//Route::view('/purchase', 'components/purchase')->name('purchase') -> middleware('auth');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
@@ -59,3 +67,4 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', LogoutController::class)
         ->name('logout');
 });
+

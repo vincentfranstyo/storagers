@@ -100,21 +100,15 @@
             <div class="mt-16 min-w-fit">
                 <div
                     class="scale-100 p-7 pt-3 pb-3 pr-10 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit w-auto flex-col">
-                    <div class="flex min-w-fit gap-x-20">
+                    <div class="flex min-w-fit justify-between">
                         <div class="flex">
-                            {{--                        <div--}}
-                            {{--                            class="flex items-center justify-center w-24 h-24 rounded-full bg-indigo-50 dark:bg-indigo-900/20">--}}
-                            {{--                            <figure>--}}
-                            {{--                                <img src="{{ asset('Pics/box.jpeg') }}" alt="box" srcset="" class="rounded-full">--}}
-                            {{--                            </figure>--}}
-                            {{--                        </div>--}}
                             <div
-                                class="flex text-3xl pl-[3rem] pt-2 justify-content-center items-center text-gray-500 dark:text-white">
-                                box
+                                class="flex text-3xl pl-4 pt-2 justify-center items-center text-gray-500 dark:text-white">
+                                {{ $catalog['nama'] }}
                             </div>
                         </div>
                         <div
-                            class="flex items-center h-auto text-gray-500 dark:text-white text-xl p-7 w-40">
+                            class="flex items-center h-auto text-gray-500 dark:text-white text-xl pt-7 pb-7 w-40">
                             <div
                                 class="flex flex-col-reverse gap-1 items-end h-auto text-gray-500 dark:text-white text-lg pb-1 pr-5 pt-1 min-w-fit">
                                 <div>total:</div>
@@ -123,21 +117,21 @@
                             </div>
                             <div
                                 class="flex flex-col-reverse gap-1 h-auto text-gray-500 dark:text-white text-lg pb-1 pr-5 pt-1 min-w-fit">
-                                <div>$30</div>
-                                <div><input type="number" name="amount" id="amount" min="0" max=""
-                                            class="w-20 h-8 dark:text-white bg-blue-950"></div>
-                                <div>x pieces</div>
+                                <div>{{ $catalog['harga'] }}</div>
+                                <div><input type="number" name="amount" id="amount" min="0" max="$catalog['stok']"
+                                            class="w-[4rem] h-8 dark:text-white bg-blue-950"></div>
+                                <div>{{ $catalog['stok'] }}</div>
                             </div>
                         </div>
                     </div>
                     <div class="flex w-auto min-w-fit justify-center  gap-x-10">
                         <button type="button"
                                 class="bg-blue-950 text-white border-b-indigo-800 rounded-full max-w-xl min-w-fit w-40 p-x-10 hover:bg-blue-200  hover:underline">
-                            <a class="text-xl hover:text-gray-500" href="{{ route('detail') }}">Back</a>
+                            <a class="text-xl hover:text-gray-500" href="{{ route('detail', ['name' => $catalog['nama']]) }}">Back</a>
                         </button>
                         <button type="button"
-                                class="bg-blue-950 text-white border-b-indigo-800 rounded-full max-w-xl min-w-fit w-40 p-x-10  hover:bg-blue-200  hover:underline">
-                            <a class="text-xl hover:text-gray-500" href="#">Buy</a>
+                                class="bg-blue-950 text-white border-b-indigo-800 rounded-full max-w-xl min-w-fit w-40 p-x-10 hover:underline disabled:bg-gray-300 hover:text-gray-500 hover:bg-blue-200">
+                            <a class="text-xl " id="buy" href="#">Buy</a>
                         </button>
                     </div>
                 </div>
@@ -163,4 +157,21 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function checkStock(stock) {
+            let amountInput = document.getElementById("amount");
+            let buyButton = document.getElementById("buy");
+            let stockQuantity = stock;
+
+            buyButton.addEventListener("click", () => {
+                if (amountInput.value > stockQuantity) {
+                    alert("Stock is not enough!");
+                } else {
+                    alert("Purchase success!");
+                }
+            })
+        }
+        checkStock({{ $catalog['stok'] }})
+    </script>
 @endsection
