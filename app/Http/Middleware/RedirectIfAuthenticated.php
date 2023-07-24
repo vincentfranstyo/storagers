@@ -24,11 +24,14 @@ class RedirectIfAuthenticated
             if (Auth::guard('api')->check()) {
                 return response()->json(['message' => 'Already logged in', 'redirect_url' => route('home')]);
             }
-//            if (JWTAuth::guard($guard)->check()) {
+//            if (Auth::guard('web')->check()) {
+//                return redirect(RouteServiceProvider::HOME);
+//            }
+//            if (Auth::guard('api')->check()) {
 //                return response()->json(['message' => 'Already logged in', 'redirect_url' => route('home')]);
 //            }
-//            if (JWTAuth\JWTGuard::user($guard)->check()) {
-//                return response()->json(['message' => 'Already logged in', 'redirect_url' => route('home')]);
+//            if (Auth::guard($guard)->check()) {
+//                return redirect(RouteServiceProvider::HOME);
 //            }
         }
 

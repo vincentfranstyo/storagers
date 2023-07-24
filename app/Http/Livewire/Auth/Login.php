@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -22,42 +23,8 @@ class Login extends Component
     /** @var bool */
     public $remember = false;
 
-    protected $rules = [
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ];
-
-//    public function authenticate()
-//    {
-//        $this->validate();
-//
-//        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-//            $this->addError('email', trans('auth.failed'));
-//
-//            return;
-//        }
-//
-//        return redirect()->intended(route('home'));
-//    }
     public function authenticate()
     {
-//        $this->validate();
-//
-//        $credentials = [
-//            'email' => $this->email,
-//            'password' => $this->password,
-//        ];
-//
-//        try {
-//            if (!$token = auth()->attempt($credentials)) {
-//                return response()->json(['error' => 'invalid_credentials'], 401);
-//            }
-//        } catch (JWTException $e) {
-//            return response()->json(['error' => 'could_not_create_token'], 500);
-//        }
-//
-//        // redirect to home page
-//        return [$this->respondWithToken($token), redirect('/')];
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
@@ -87,4 +54,16 @@ class Login extends Component
     {
         return view('livewire.auth.login')->extends('layouts.auth');
     }
+    //    public function authenticate()
+//    {
+//        $this->validate();
+//
+//        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+//            $this->addError('email', trans('auth.failed'));
+//
+//            return;
+//        }
+//
+//        return redirect()->intended(route('home'));
+//    }
 }
