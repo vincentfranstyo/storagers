@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class RedirectIfAuthenticated
 {
@@ -23,6 +24,15 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 return redirect(route('home'));
             }
+//            if (Auth::guard('web')->check()) {
+//                return redirect(RouteServiceProvider::HOME);
+//            }
+//            if (Auth::guard('api')->check()) {
+//                return response()->json(['message' => 'Already logged in', 'redirect_url' => route('home')]);
+//            }
+//            if (Auth::guard($guard)->check()) {
+//                return redirect(RouteServiceProvider::HOME);
+//            }
         }
 
         return $next($request);

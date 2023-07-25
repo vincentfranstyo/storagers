@@ -9,10 +9,21 @@ use Illuminate\Http\RedirectResponse;
 
 class LogoutController extends Controller
 {
-    public function __invoke(): RedirectResponse
+//    public function __invoke(): RedirectResponse
+//    {
+//        Auth::logout();
+//
+//        return redirect(route('home'));
+//    }
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function __invoke(): \Illuminate\Http\JsonResponse
     {
-        Auth::logout();
+        auth()->logout();
 
-        return redirect(route('home'));
+        return response()->json(['message' => 'Successfully logged out']);
     }
 }
