@@ -128,7 +128,7 @@
                         </button>
                         <button type="button"
                                 class="bg-blue-950 text-white border-b-indigo-800 rounded-full max-w-xl min-w-fit w-40 p-x-10  hover:bg-blue-200  hover:underline">
-                            <a class="text-xl hover:text-gray-500" href="{{ route('purchase', ['name' => $catalog['nama']]) }}">Purchase</a>
+                            <a class="text-xl hover:text-gray-500" href="{{ route('purchase.show', ['name' => $catalog['nama']]) }}">Purchase</a>
                         </button>
                     </div>
                 </div>

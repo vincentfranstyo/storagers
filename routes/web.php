@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -26,12 +27,13 @@ use App\Http\Controllers\PurchaseController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/detail/{name}', [DetailController::class, 'show'])->name('detail')->middleware('auth');
-//Route::get('/history/{id}', [DetailController::class, 'history'])->name('history')->middleware('auth');
-Route::get('/purchase/{name}', [PurchaseController::class, 'purchase'])->name('purchase')->middleware('auth');
+Route::get('/history', [HistoryController::class, 'index'])->name('history')->middleware('auth');
+Route::get('/purchase/{name}', [PurchaseController::class, 'show'])->name('purchase.show')->middleware('auth');
+Route::post('/purchase/{name}', [PurchaseController::class, 'purchase'])->name('purchase');
 
 //Route::view('/', 'home')->name('home');
 //Route::view('/detail', 'components/detail')->name('detail') -> middleware('auth');
-Route::view('/history', 'components/history')->name('history') -> middleware('auth');
+//Route::view('/history', 'components/history')->name('history') -> middleware('auth');
 //Route::view('/purchase', 'components/purchase')->name('purchase') -> middleware('auth');
 
 Route::middleware('guest')->group(function () {

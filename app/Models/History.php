@@ -16,6 +16,7 @@ class History extends Model
     protected $fillable = [
         'user_id',
         'barang_id',
+        'nama_barang',
         'jumlah',
         'total_harga',
     ]; // Define the fillable attributes

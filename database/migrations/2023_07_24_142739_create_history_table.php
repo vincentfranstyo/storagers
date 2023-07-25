@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id('history_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('barang_id');
+            $table->string('nama_barang');
             $table->integer('jumlah');
             $table->decimal('total_harga', 8, 2);
             $table->timestamps();

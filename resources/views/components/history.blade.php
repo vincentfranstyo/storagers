@@ -82,7 +82,8 @@
                     </div>
                 @else
                     <a href="{{ route('login') }}"
-                       class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">Log in</a>
+                       class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">Log
+                        in</a>
 
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
@@ -92,42 +93,44 @@
             </div>
 
         @endif
-            <div class="p-6 mx-auto max-w-7xl lg:p-8">
-                <div class="flex justify-center">
-                    <h1 class="text-gray-500 dark:text-white text-4xl font-bold">History</h1>
-                </div>
-                <div class="mt-16 max-w-96 min-w-fit w-96">
-                    <div class="grid grid-rows-10 gap-5">
+        <div class="p-6 mx-auto max-w-7xl lg:p-8">
+            <div class="flex justify-center">
+                <h1 class="text-gray-500 dark:text-white text-4xl font-bold">History</h1>
+            </div>
+            <div class="mt-16 max-w-96 min-w-fit w-96">
+                <div class="grid grid-rows-10 gap-5">
+                    @foreach($histories as $item)
                         <div
                             class="scale-100 p-4 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit gap-20 w-auto justify-between">
                             <div class="flex text-3xl items-center text-gray-500 dark:text-white">
-                                box
+                                {{ $item->nama_barang }}
                             </div>
                             <div class="flex flex-col items-end text-gray-500 dark:text-white text-xl">
-                                <div>x pieces</div>
-                                <div>$30</div>
+                                <div>{{ $item->jumlah }} pieces</div>
+                                <div>{{ $item->total_harga }}</div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="flex justify-center px-0 mt-16 sm:items-center sm:justify-between">
-                    <div class="text-sm text-center text-gray-500 dark:text-gray-400 sm:text-left">
-                        <div class="flex items-center gap-4">
-                            <a href="https://github.com/sponsors/taylorotwell"
-                               class="inline-flex items-center group hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                     class="w-5 h-5 mr-1 -mt-px stroke-gray-400 dark:stroke-gray-600 group-hover:stroke-gray-600 dark:group-hover:stroke-gray-400">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
-                                </svg>
-                                Sponsor
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ml-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
-                        made with ❤️ by Vincent Franstyo
-                    </div>
+                    @endforeach
                 </div>
             </div>
+            <div class="flex justify-center px-0 mt-16 sm:items-center sm:justify-between">
+                <div class="text-sm text-center text-gray-500 dark:text-gray-400 sm:text-left">
+                    <div class="flex items-center gap-4">
+                        <a href="https://github.com/sponsors/taylorotwell"
+                           class="inline-flex items-center group hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 class="w-5 h-5 mr-1 -mt-px stroke-gray-400 dark:stroke-gray-600 group-hover:stroke-gray-600 dark:group-hover:stroke-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                            </svg>
+                            Sponsor
+                        </a>
+                    </div>
+                </div>
+                <div class="ml-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
+                    made with ❤️ by Vincent Franstyo
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

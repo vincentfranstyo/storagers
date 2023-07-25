@@ -97,45 +97,55 @@
             <div class="flex justify-center">
                 <h1 class="text-gray-500 dark:text-white text-4xl font-bold">Purchase</h1>
             </div>
-            <div class="mt-16 min-w-fit">
-                <div
-                    class="scale-100 p-7 pt-3 pb-3 pr-10 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit w-auto flex-col">
-                    <div class="flex min-w-fit justify-between">
-                        <div class="flex">
+            @if(session('alert'))
+                <div class="alert alert-success">
+                    {{ session('alert') }}
+                </div>
+            @endif
+            <form action="{{ route('purchase', ['name' => $catalog['nama']]) }}" method="POST">
+                @csrf
+                <div class="mt-16 min-w-fit">
+                    <div
+                        class="scale-100 p-7 pt-3 pb-3 pr-10 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-indigo-500 min-w-fit w-auto flex-col">
+                        <div class="flex min-w-fit justify-between">
+                            <div class="flex">
+                                <div
+                                    class="flex text-3xl pl-4 pt-2 justify-center items-center text-gray-500 dark:text-white">
+                                    {{ $catalog['nama'] }}
+                                </div>
+                            </div>
                             <div
-                                class="flex text-3xl pl-4 pt-2 justify-center items-center text-gray-500 dark:text-white">
-                                {{ $catalog['nama'] }}
+                                class="flex items-center h-auto text-gray-500 dark:text-white text-xl pt-7 pb-7 w-40">
+                                <div
+                                    class="flex flex-col-reverse gap-1 items-end h-auto text-gray-500 dark:text-white text-lg pb-1 pr-5 pt-1 min-w-fit">
+                                    <div><label for="amount">amount:</label></div>
+                                    <div>price:</div>
+                                    <div>stock:</div>
+                                </div>
+                                <div
+                                    class="flex flex-col-reverse gap-1 h-auto text-gray-500 dark:text-white text-lg pb-1 pr-5 pt-1 min-w-fit">
+                                    <div><input type="number" name="amount" id="amount" min="0"
+                                                max="{{ $catalog['stok'] }}"
+                                                placeholder="0" class="w-[4rem] h-8 dark:text-white bg-blue-950"></div>
+                                    <div>{{ $catalog['harga'] }}</div>
+                                    <div>{{ $catalog['stok'] }}</div>
+                                </div>
                             </div>
                         </div>
-                        <div
-                            class="flex items-center h-auto text-gray-500 dark:text-white text-xl pt-7 pb-7 w-40">
-                            <div
-                                class="flex flex-col-reverse gap-1 items-end h-auto text-gray-500 dark:text-white text-lg pb-1 pr-5 pt-1 min-w-fit">
-                                <div>total:</div>
-                                <div><label for="amount">amount:</label></div>
-                                <div>stock:</div>
-                            </div>
-                            <div
-                                class="flex flex-col-reverse gap-1 h-auto text-gray-500 dark:text-white text-lg pb-1 pr-5 pt-1 min-w-fit">
-                                <div>{{ $catalog['harga'] }}</div>
-                                <div><input type="number" name="amount" id="amount" min="0" max="$catalog['stok']"
-                                            class="w-[4rem] h-8 dark:text-white bg-blue-950"></div>
-                                <div>{{ $catalog['stok'] }}</div>
-                            </div>
+                        <div class="flex w-auto min-w-fit justify-center  gap-x-10">
+                            <button type="button"
+                                    class="bg-blue-950 text-white border-b-indigo-800 rounded-full max-w-xl min-w-fit w-40 p-x-10 hover:bg-blue-200  hover:underline">
+                                <a class="text-xl hover:text-gray-500"
+                                   href="{{ route('detail', ['name' => $catalog['nama']]) }}">Back</a>
+                            </button>
+                            <button type="submit"
+                                    class="bg-blue-950 text-white border-b-indigo-800 rounded-full max-w-xl min-w-fit w-40 p-x-10 hover:underline disabled:bg-gray-300 hover:text-gray-500 hover:bg-blue-200">
+                                <a class="text-xl" id="buy">Buy</a>
+                            </button>
                         </div>
-                    </div>
-                    <div class="flex w-auto min-w-fit justify-center  gap-x-10">
-                        <button type="button"
-                                class="bg-blue-950 text-white border-b-indigo-800 rounded-full max-w-xl min-w-fit w-40 p-x-10 hover:bg-blue-200  hover:underline">
-                            <a class="text-xl hover:text-gray-500" href="{{ route('detail', ['name' => $catalog['nama']]) }}">Back</a>
-                        </button>
-                        <button type="button"
-                                class="bg-blue-950 text-white border-b-indigo-800 rounded-full max-w-xl min-w-fit w-40 p-x-10 hover:underline disabled:bg-gray-300 hover:text-gray-500 hover:bg-blue-200">
-                            <a class="text-xl " id="buy" href="#">Buy</a>
-                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
             <div class="flex justify-center px-0 mt-16 sm:items-center sm:justify-between">
                 <div class="text-sm text-center text-gray-500 dark:text-gray-400 sm:text-left">
                     <div class="flex items-center gap-4">
@@ -157,21 +167,19 @@
             </div>
         </div>
     </div>
+    {{--    <script>--}}
+    {{--        const amountInput = document.getElementById('amount');--}}
+    {{--        const amount = parseInt(amountInput.value);--}}
+    {{--        const purchaseLink = {{ route('purchase', ['name' => $catalog['nama'], 'amount' => ' + amount + ']) }};--}}
 
-    <script>
-        function checkStock(stock) {
-            let amountInput = document.getElementById("amount");
-            let buyButton = document.getElementById("buy");
-            let stockQuantity = stock;
-
-            buyButton.addEventListener("click", () => {
-                if (amountInput.value > stockQuantity) {
-                    alert("Stock is not enough!");
-                } else {
-                    alert("Purchase success!");
-                }
-            })
-        }
-        checkStock({{ $catalog['stok'] }})
-    </script>
+    {{--        const buyButton = document.getElementById('buy');--}}
+    {{--        buyButton.addEventListener('click', () => {--}}
+    {{--            if (amountInput.value > {{ $catalog['stok'] }}) {--}}
+    {{--                alert('Stock is not enough!');--}}
+    {{--            } else {--}}
+    {{--                window.location.href = purchaseLink;--}}
+    {{--                alert('Purchase success!');--}}
+    {{--            }--}}
+    {{--        })--}}
+    {{--    </script>--}}
 @endsection
