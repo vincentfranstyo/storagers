@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\WithPagination;
 
 class HomeController extends Controller
 {
     use WithPagination;
-    public function index()
+    public function index(Request $request)
     {
+        auth()->setDefaultDriver('api');
         $response = Http::get('http://localhost:4000/api/barang');
         $collection = collect($response->json()['data']);
 

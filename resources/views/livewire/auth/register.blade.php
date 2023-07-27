@@ -20,7 +20,8 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
-            <form wire:submit.prevent="register">
+            <form action="{{ route('registerApi') }}" method="POST">
+                @csrf
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 leading-5">
                         Name

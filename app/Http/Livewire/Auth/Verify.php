@@ -5,16 +5,17 @@ namespace App\Http\Livewire\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class Verify extends Component
 {
     public function resend()
     {
-        if (Auth::user()->hasVerifiedEmail()) {
+        if (Auth::User()->hasVerifiedEmail()) {
             redirect(route('home'));
         }
 
-        Auth::user()->sendEmailVerificationNotification();
+        Auth::User()->sendEmailVerificationNotification();
 
         $this->emit('resent');
 

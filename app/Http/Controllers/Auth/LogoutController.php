@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cookie;
 
 class LogoutController extends Controller
 {
@@ -20,10 +21,14 @@ class LogoutController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(): \Illuminate\Http\JsonResponse
+    public function __invoke(): RedirectResponse
     {
+        // forget the token from login
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        // delete the cookie
+        Cookie::forget('jwt');
+
+        return redirect('/');
     }
 }

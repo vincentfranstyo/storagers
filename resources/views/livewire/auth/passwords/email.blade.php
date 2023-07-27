@@ -31,6 +31,7 @@
                 </div>
             @else
                 <form wire:submit.prevent="sendResetPasswordLink">
+                    @csrf
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 leading-5">
                             Email address

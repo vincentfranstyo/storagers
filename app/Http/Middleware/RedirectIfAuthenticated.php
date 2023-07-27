@@ -22,17 +22,8 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(route('home'));
+                return response()->json(['message' => 'Already logged in', 'redirect_url' => route('home')]);
             }
-//            if (Auth::guard('web')->check()) {
-//                return redirect(RouteServiceProvider::HOME);
-//            }
-//            if (Auth::guard('api')->check()) {
-//                return response()->json(['message' => 'Already logged in', 'redirect_url' => route('home')]);
-//            }
-//            if (Auth::guard($guard)->check()) {
-//                return redirect(RouteServiceProvider::HOME);
-//            }
         }
 
         return $next($request);

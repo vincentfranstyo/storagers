@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Access\AuthorizationException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class EmailVerificationController extends Controller
 {
     public function __invoke(string $id, string $hash): RedirectResponse
     {
+        $guard = 'api';
         if (!hash_equals((string) $id, (string) Auth::user()->getKey())) {
             throw new AuthorizationException();
         }

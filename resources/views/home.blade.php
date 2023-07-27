@@ -19,7 +19,7 @@
     <div
         class="relative min-h-screen bg-gray-100 bg-center sm:flex sm:justify-center sm:items-center bg-dots dark:bg-gray-900 selection:bg-indigo-500 selection:text-white">
 
-        @if (Route::has('login'))
+        @if (Route::has('loginApi'))
             <div x-data="{ open: false }" class="p-6 text-right sm:fixed sm:top-0 sm:right-0">
                 @auth
                     <button
