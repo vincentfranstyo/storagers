@@ -25,48 +25,51 @@ use App\Http\Controllers\PurchaseController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
-Route::get('/detail/{name}', [DetailController::class, 'show'])->name('detail')->middleware('auth');
-Route::get('/history', [HistoryController::class, 'index'])->name('history')->middleware('auth');
-Route::get('/purchase/{name}', [PurchaseController::class, 'show'])->name('purchase.show')->middleware('auth');
-Route::post('/purchase/{name}', [PurchaseController::class, 'purchase'])->name('purchase');
+//Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 //Route::view('/', 'home')->name('home');
 //Route::view('/detail', 'components/detail')->name('detail') -> middleware('auth');
 //Route::view('/history', 'components/history')->name('history') -> middleware('auth');
 //Route::view('/purchase', 'components/purchase')->name('purchase') -> middleware('auth');
 
+Route::middleware('jwt.verify')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/detail/{name}', [DetailController::class, 'show'])->name('detail');
+    Route::get('/history', [HistoryController::class, 'index'])->name('history');
+    Route::get('/purchase/{name}', [PurchaseController::class, 'show'])->name('purchase.show');
+    Route::post('/purchase/{name}', [PurchaseController::class, 'purchase'])->name('purchase');
+});
+
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
-        ->name('login');
+        ->name('login_page');
 
     Route::get('register', Register::class)
-        ->name('register');
-    Route::post('register', [Register::class, 'register'])
-        ->name('register.post');
+        ->name('register_page');
 });
 
-Route::get('password/reset', Email::class)
-    ->name('password.request');
-
-Route::get('password/reset/{token}', Reset::class)
-    ->name('password.reset');
-
-Route::middleware('auth')->group(function () {
-    Route::get('email/verify', Verify::class)
-        ->middleware('throttle:6,1')
-        ->name('verification.notice');
-
-    Route::get('password/confirm', Confirm::class)
-        ->name('password.confirm');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)
-        ->middleware('signed')
-        ->name('verification.verify');
-
-    Route::post('logout', LogoutController::class)
-        ->name('logout');
-});
+//
+//Route::get('password/reset', Email::class)
+//    ->name('password.request');
+//
+//Route::get('password/reset/{token}', Reset::class)
+//    ->name('password.reset');
+//
+//Route::middleware('auth')->group(function () {
+//    Route::get('email/verify', Verify::class)
+//        ->middleware('throttle:6,1')
+//        ->name('verification.notice');
+//
+//    Route::get('password/confirm', Confirm::class)
+//        ->name('password.confirm');
+//});
+//
+//Route::middleware('auth')->group(function () {
+//    Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)
+//        ->middleware('signed')
+//        ->name('verification.verify');
+//
+//    Route::post('logout', LogoutController::class)
+//        ->name('logout');
+//});
 

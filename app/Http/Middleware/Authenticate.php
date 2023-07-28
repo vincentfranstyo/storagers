@@ -12,6 +12,17 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : route('login');
+        return $request->expectsJson() ? null : route('home');
+    }
+
+    public function handle($request, $next, ...$guards)
+    {
+        if ($request->cookie('jwt')) {
+            $request->headers->set('Authorization', 'Bearer ' . $request->cookie('jwt'));
+        }
+
+        $this->authenticate($request, $guards);
+
+        return $next($request);
     }
 }

@@ -22,18 +22,18 @@ class Login extends Component
         'password' => ['required'],
     ];
 
-    public function authenticate()
-    {
-        $this->validate();
-
-        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            $this->addError('email', trans('auth.failed'));
-
-            return;
-        }
-
-        return redirect()->intended(route('home'));
-    }
+//    public function authenticate()
+//    {
+//        $this->validate();
+//
+//        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+//            $this->addError('email', trans('auth.failed'));
+//
+//            return;
+//        }
+//
+//        return redirect()->intended(route('home'));
+//    }
 
     public function render()
     {

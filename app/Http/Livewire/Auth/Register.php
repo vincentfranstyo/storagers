@@ -26,28 +26,28 @@ class Register extends Component
     /** @var string */
     public $passwordConfirmation = '';
 
-    public function register()
-    {
-        $this->validate([
-            'name' => ['required'],
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:8', 'same:passwordConfirmation'],
-        ]);
-
-        $user = User::create([
-            'email' => $this->email,
-            'username' => $this->username,
-            'name' => $this->name,
-            'password' => Hash::make($this->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user, true);
-
-        return redirect()->intended(route('home'));
-    }
+//    public function register()
+//    {
+//        $this->validate([
+//            'name' => ['required'],
+//            'username' => ['required', 'string', 'max:255', 'unique:users'],
+//            'email' => ['required', 'email', 'unique:users'],
+//            'password' => ['required', 'min:8', 'same:passwordConfirmation'],
+//        ]);
+//
+//        $user = User::create([
+//            'email' => $this->email,
+//            'username' => $this->username,
+//            'name' => $this->name,
+//            'password' => Hash::make($this->password),
+//        ]);
+//
+//        event(new Registered($user));
+//
+//        Auth::login($user, true);
+//
+//        return redirect()->intended(route('home'));
+//    }
 
     public function render()
     {
