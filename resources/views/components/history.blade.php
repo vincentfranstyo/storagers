@@ -112,6 +112,7 @@
                         </div>
                     @endforeach
                 </div>
+                {{ $histories->links() }}
             </div>
             <div class="flex justify-center px-0 mt-16 sm:items-center sm:justify-between">
                 <div class="text-sm text-center text-gray-500 dark:text-gray-400 sm:text-left">

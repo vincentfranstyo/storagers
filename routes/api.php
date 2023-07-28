@@ -21,15 +21,6 @@ use App\Http\Livewire\Auth\Login;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
-//Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
-//    Route::post('/register', [AuthController::class, 'register'])->name('register');
-//    Route::post('/login', [AuthController::class, 'login'])->name('login');
-//});
-
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -40,11 +31,3 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     });
 });
 
-
-//Route::group(['middleware' => 'api'], function ($router) {
-//    Route::get('/', [HomeController::class, 'index'])->name('home');
-//    Route::get('/detail/{name}', [DetailController::class, 'show'])->name('detail');
-//    Route::get('/history', [HistoryController::class, 'index'])->name('history');
-//    Route::get('/purchase/{name}', [PurchaseController::class, 'show'])->name('purchase.show');
-//    Route::post('/purchase/{name}', [PurchaseController::class, 'purchase'])->name('purchase');
-//});

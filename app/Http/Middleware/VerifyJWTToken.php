@@ -13,13 +13,6 @@ class VerifyJWTToken
     public function handle($request, Closure $next)
     {
         $token = $request->cookie('jwt');
-//        if (isset($_COOKIE['jwt'])) {
-//            $token = $_COOKIE['jwt'];
-//            // Now you can use the $token variable
-//        } else {
-//            return response()->json(['error' => 'token_not_found'], 401);
-//        }
-//        dd($token);
         try {
             $user = JWTAuth::setToken($token)->authenticate();
         } catch (TokenExpiredException $e) {

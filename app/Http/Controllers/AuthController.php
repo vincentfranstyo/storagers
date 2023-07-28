@@ -71,16 +71,7 @@ class AuthController extends Controller
 
         $cookie = Cookie::make('jwt', $token, 72 * 60, null, null, false, true);
         setCookie('jwt', $token, time() + (86400 * 30), "/"); // 86400 = 1 day
-//        dd($cookie);
         return redirect()->route('home')->withCookie($cookie);
-//        Cookie::queue('jwt', $token, 60, null, null, false, true); // 60 minutes expiration
-//        dd($cookie);
-
-        // Set a HttpOnly cookie named 'jwt' with the token value
-//        return response()->json(['token' => $token], 200)
-//            ->withCookie(cookie('jwt', $token, 60, null, null, false, true));
-//        $response = response('Redirecting...')->withCookie($cookie);
-//        return $response->header('Location', route('home')); // 60 minutes expiration
     }
 
     /**
