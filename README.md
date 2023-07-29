@@ -75,3 +75,7 @@ A monolith project as a mini e-commerce application made with TALL (Tailwind, Al
 - **SOLID (LSP)**: LSP adalah saat dimana superclass dapat digantikan oleh subclass tanpa mengubah fungsionalitas dari superclass tersebut.
 - **SOLID (ISP)**: ISP adalah saat dimana sebuah interface tidak memiliki fungsi yang tidak digunakan oleh implementasi dari interface tersebut. Pada project ini, tidak ada interface yang tidak memiliki fungsi yang tidak digunakan.
 - **SOLID (DIP)**: DIP adalah saat dimana sebuah fungsi tidak bergantung pada implementasi dari fungsi tersebut, tetapi bergantung pada interface dari fungsi tersebut.
+
+## WARNING
+- **DO NOT** use `php artisan migrate:fresh` because it will delete all the data in the database
+- Sorry the docker is not working. I have tried to fix it but it still doesn't work. I will try to fix it again later.
