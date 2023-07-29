@@ -10,17 +10,28 @@ A monolith project as a mini e-commerce application made with TALL (Tailwind, Al
 - [PHP](https://www.php.net/downloads.php)
 - [Composer](https://getcomposer.org/download/)
 - [PHP Artisan](https://laravel.com/docs/8.x/artisan)
+- [Laravel](https://laravel.com/docs/8.x/installation)
+- [TALL Stack](https://github.com/laravel-frontend-presets/tall)
 - [NodeJS](https://nodejs.org/en/download/)
+- [Docker](https://docs.docker.com/get-docker/)
+- [MySQL](https://dev.mysql.com/downloads/installer/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [Tymon/JWTAuth](https://jwt-auth.readthedocs.io/en/develop/laravel-installation/)
 - Make sure you have cloned the API from https://github.com/vincentfranstyo/storagersAPI.git 
 - Run the API first
 
 ### Locally
 1. Clone this repository
 2. Run `composer install`
-3. Run `npm install` 
-4. Run `npm run dev`
-5. Run `php artisan serve`
-6. Enjoy!
+3. Run `npm install`
+4. Run `php artisan key:generate`
+5. Create your own database at the database directory, you can manually create it. (e.g. database.mysql)
+6. Run `php artisan migrate`
+7. Run `php artisan db:seed`
+8. Set all the DB credentials in .env files (e.g. connection, host, port, name, password); 
+9. Run `npm run dev`
+10. Run `php artisan serve`
+11. Enjoy!
 
 ## Design Patterns
 - **Strategy**: digunakan karena dapat mengubah behaviour dari sebuah class tanpa mengubah class itu sendiri
