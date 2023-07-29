@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\History;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class PurchaseController extends Controller
 {
@@ -25,9 +27,15 @@ class PurchaseController extends Controller
         return view('components/purchase', ['catalog' => $catalog]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function purchase(Request $request, $name)
     {
         $response = Http::get('http://localhost:4000/api/barang');
+        $cookieHeader = $request->headers->get('cookie');
+        $jwtToken = substr($cookieHeader, strpos($cookieHeader, '=') + 1);
+//        dd($jwtToken);
         $catalogs = $response->json()['data'];
         $catalog = null;
         $amount = $request->input('amount');
@@ -42,7 +50,7 @@ class PurchaseController extends Controller
             return [redirect()->route('purchase.show', ['name' => $name]), with('alert', 'Stok tidak cukup')];
         }
         $this->createHistory($catalog, $amount);
-        $this->reduceAmount($catalog, $amount);
+        $this->reduceAmount($request, $catalog, $amount);
 
         return redirect()->route('home');
     }
@@ -68,9 +76,12 @@ class PurchaseController extends Controller
         );
     }
 
-    public function reduceAmount($catalog, $amount)
+    public function reduceAmount($request, $catalog, $amount)
     {
-        $response = Http::put('http://localhost:4000/api/barang/' . $catalog['id'], [
+        $token = $request->cookie('jwt');
+        $user = JWTAuth::authenticate($token);
+        if (!$user) throw new Exception('User not found');
+        $response = Http::put('http://localhost:4000/api/barang/' . Auth::user()['username'] . '/' . $catalog['id'], [
             'id' => $catalog['id'],
             'nama' => $catalog['nama'],
             'kode' => $catalog['kode'],
