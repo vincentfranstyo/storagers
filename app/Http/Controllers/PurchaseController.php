@@ -27,15 +27,11 @@ class PurchaseController extends Controller
         return view('components/purchase', ['catalog' => $catalog]);
     }
 
-    /**
-     * @throws Exception
-     */
     public function purchase(Request $request, $name)
     {
         $response = Http::get('http://localhost:4000/api/barang');
         $cookieHeader = $request->headers->get('cookie');
         $jwtToken = substr($cookieHeader, strpos($cookieHeader, '=') + 1);
-//        dd($jwtToken);
         $catalogs = $response->json()['data'];
         $catalog = null;
         $amount = $request->input('amount');
@@ -89,7 +85,6 @@ class PurchaseController extends Controller
             'stok' => $catalog['stok'] - $amount,
             'perusahaan_id' => $catalog['perusahaan_id'],
         ]);
-
         return $response->json();
     }
 }
