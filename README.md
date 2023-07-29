@@ -29,9 +29,10 @@ A monolith project as a mini e-commerce application made with TALL (Tailwind, Al
 6. Run `php artisan migrate`
 7. Run `php artisan db:seed`
 8. Set all the DB credentials in .env files (e.g. connection, host, port, name, password); 
-9. Run `npm run dev`
-10. Run `php artisan serve`
-11. Enjoy!
+9. Run `php artisan jwt:secret`
+10. Run `npm run dev`
+11. Run `php artisan serve`
+12. Enjoy!
 
 ## Design Patterns
 - **Strategy**: digunakan karena dapat mengubah behaviour dari sebuah class tanpa mengubah class itu sendiri
